@@ -72,7 +72,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
         collapsed ? "flex flex-col items-center gap-2" : "flex items-center justify-center gap-2"
       )}>
         <a
-          href="https://linkedin.com/in/moniruzzaman"
+          href="https://www.linkedin.com/in/zamanshovon/"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon"
@@ -81,7 +81,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
           <Linkedin className="w-5 h-5" />
         </a>
         <a
-          href="https://x.com/moniruzzaman"
+          href="https://x.com/zamanshovon"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon"
@@ -90,7 +90,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
           <XIcon />
         </a>
         <a
-          href="https://github.com/moniruzzaman"
+          href="https://github.com/zamanshovon"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon"
