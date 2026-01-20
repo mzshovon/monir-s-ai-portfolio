@@ -106,7 +106,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: section === "about" ? "Your background"
+      content: section === "about" ? "Tell me about you?"
         : "What are you working on?",
     };
     setMessages((prev) => [...prev, userMessage]);
