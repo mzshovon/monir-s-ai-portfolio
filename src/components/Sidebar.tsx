@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User, Info, Briefcase, Mail, ChevronLeft, ChevronRight, Linkedin, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -10,10 +11,10 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: "me", label: "Me", icon: User },
-  { id: "about", label: "About", icon: Info },
-  { id: "doing", label: "What I am doing", icon: Briefcase },
-  { id: "hire", label: "Hire me", icon: Mail },
+  { id: "me", link: "/", label: "Me", icon: User },
+  { id: "about", link: "/about", label: "About", icon: Info },
+  { id: "doing", link: "/doing", label: "What I am doing", icon: Briefcase },
+  { id: "hire", link: "/hire", label: "Hire me", icon: Mail },
 ];
 
 const XIcon = () => (
@@ -52,6 +53,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
       {/* Menu Items */}
       <nav className="flex-1 p-2 space-y-1 overflow-y-auto scrollbar-thin">
         {menuItems.map((item) => (
+          <Link to={item.link} key={item.id} className="w-full">
           <button
             key={item.id}
             onClick={() => onSectionChange(item.id)}
@@ -63,6 +65,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
             <item.icon className="w-5 h-5 shrink-0" />
             {!collapsed && <span>{item.label}</span>}
           </button>
+          </Link>
         ))}
       </nav>
 
