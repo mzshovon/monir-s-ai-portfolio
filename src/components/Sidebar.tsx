@@ -11,8 +11,8 @@ interface SidebarProps {
 
 const menuItems = [
   { id: "me", label: "Me", icon: User },
-  { id: "about", label: "Your background", icon: Info },
-  { id: "doing", label: "What are you working on?", icon: Briefcase },
+  { id: "about", label: "About", icon: Info },
+  { id: "doing", label: "What I am doing", icon: Briefcase },
   { id: "hire", label: "Hire me", icon: Mail },
 ];
 
