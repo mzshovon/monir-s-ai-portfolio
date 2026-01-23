@@ -39,7 +39,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
         )}
         <button
           onClick={onToggle}
-          className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors ml-auto"
+          className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors ml-auto hidden md:flex"
         >
           {collapsed ? (
             <ChevronRight className="w-5 h-5 text-muted-foreground" />
@@ -69,7 +69,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
       {/* Footer with Social Links */}
       <div className={cn(
         "p-3 border-t border-sidebar-border",
-        collapsed ? "flex flex-col items-center gap-2" : "flex items-center justify-center gap-2"
+        collapsed ? "flex flex-col items-center gap-2" : "flex items-center justify-center gap-3"
       )}>
         <a
           href="https://www.linkedin.com/in/zamanshovon/"

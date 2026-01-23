@@ -126,24 +126,24 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
   };
 
   return (
-    <div className="flex-1 flex flex-col h-screen bg-background">
+    <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden">
       {/* Header */}
-      <header className="flex items-center px-4 py-3 border-b border-border">
+      <header className="flex items-center px-3 sm:px-4 py-2 sm:py-3 border-b border-border shrink-0">
         <ModelDropdown selectedModel={selectedModel} onModelChange={setSelectedModel} />
       </header>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-6">
-        <div className="max-w-3xl mx-auto space-y-4">
+      <div className="flex-1 overflow-y-auto scrollbar-thin px-3 sm:px-4 py-4 sm:py-6">
+        <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
           {messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
-              <div className="w-16 h-16 mb-6 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-3xl">👋</span>
+            <div className="flex flex-col items-center justify-center h-full min-h-[300px] sm:min-h-[400px] text-center px-4">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full bg-primary/20 flex items-center justify-center">
+                <span className="text-2xl sm:text-3xl">👋</span>
               </div>
-              <h1 className="text-2xl font-semibold text-foreground mb-2">
+              <h1 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                 Hi, I'm Md. Moniruzzaman
               </h1>
-              <p className="text-muted-foreground max-w-md mb-8">
+              <p className="text-sm sm:text-base text-muted-foreground max-w-md mb-6 sm:mb-8">
                 Senior Software Engineer L-2 at Brain Station 23 PLC. 
                 Ask me anything about my work, experience, or how we can collaborate!
               </p>
@@ -157,7 +157,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
                   showLinkedIn={message.showLinkedIn}
                 />
                 {message.showExpertise && (
-                  <div className="mt-4 ml-12 space-y-3 p-4 bg-card rounded-xl border border-border">
+                  <div className="mt-3 sm:mt-4 ml-0 sm:ml-12 space-y-2 sm:space-y-3 p-3 sm:p-4 bg-card rounded-xl border border-border">
                     {expertiseData.map((item) => (
                       <ExpertiseBar
                         key={item.skill}
@@ -172,9 +172,9 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
             ))
           )}
           {isTyping && (
-            <div className="chat-message flex gap-4 py-6 px-4 rounded-2xl bg-card">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground text-sm">M</span>
+            <div className="chat-message flex gap-3 sm:gap-4 py-4 sm:py-6 px-3 sm:px-4 rounded-2xl bg-card">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+                <span className="text-primary-foreground text-xs sm:text-sm">M</span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse-subtle" />
@@ -188,13 +188,13 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
       </div>
 
       {/* Input Area */}
-      <div className="p-4 pb-6">
+      <div className="p-3 sm:p-4 pb-4 sm:pb-6 shrink-0">
         <div className="max-w-3xl mx-auto">
           {messages.length === 0 && (
             <SuggestionPills onSelect={handleSuggestionClick} />
           )}
           <ChatInput onSend={handleSend} disabled={isTyping} />
-          <p className="text-center text-xs text-muted-foreground mt-3">
+          <p className="text-center text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3">
             This is an interactive portfolio. Feel free to explore!
           </p>
         </div>
