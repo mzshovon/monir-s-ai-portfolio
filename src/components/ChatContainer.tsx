@@ -171,7 +171,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
             <div className="flex flex-col items-center justify-center h-full min-h-[300px] sm:min-h-[400px] text-center px-4">
               <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center">
               <img
-                src="/public/images/profile.jpeg"
+                src="https://media.licdn.com/dms/image/v2/D5603AQFybsPhGM8aVA/profile-displayphoto-shrink_200_200/B56ZT4TWr2HEAY-/0/1739332613060?e=1772064000&v=beta&t=sumUhCaYY9dKf3G8HYWxenuEHNMCWkEOqpXVJQatWv0"
                 alt="Md. Moniruzzaman"
                 className="w-full h-full object-cover"
               />
