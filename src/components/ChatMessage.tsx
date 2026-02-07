@@ -1,5 +1,8 @@
 import { User, Bot, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
+import SocialComponent from "./SocialComponent";
+
 
 interface ChatMessageProps {
   role: "user" | "assistant";
@@ -28,18 +31,43 @@ export function ChatMessage({ role, content, showLinkedIn }: ChatMessageProps) {
         )}
       </div>
       <div className="flex-1 space-y-3">
-        <p className="text-foreground leading-relaxed whitespace-pre-wrap">{content}</p>
-        {showLinkedIn && (
-          <a
-            href="https://linkedin.com/in/moniruzzaman"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0077B5] hover:bg-[#006699] text-white rounded-lg transition-colors text-sm font-medium"
-          >
-            <Linkedin className="w-4 h-4" />
-            Connect on LinkedIn
-          </a>
-        )}
+        <ReactMarkdown
+          components={{
+            // Bold (**text**)
+            strong: ({ children }) => (
+              <strong className="font-semibold text-foreground">
+                {children}
+              </strong>
+            ),
+
+            // Bullet points
+            ul: ({ children }) => (
+              <ul className="list-disc pl-5 space-y-1">
+                {children}
+              </ul>
+            ),
+
+            li: ({ children }) => (
+              <li className="leading-relaxed">
+                {children}
+              </li>
+            ),
+
+            // Paragraph spacing
+            p: ({ children }) => (
+              <p className="leading-relaxed">
+                {children}
+              </p>
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+        <div className="flex items-center gap-2 mt-4">
+          {showLinkedIn && (
+            <SocialComponent />
+          )}
+      </div>
       </div>
     </div>
   );

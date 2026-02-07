@@ -66,7 +66,9 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
     return sectionResponses[Math.floor(Math.random() * sectionResponses.length)];
   };
 
-  const handleSend = (content: string) => {
+  const handleSend = async (content: string) => {
+    const token = import.meta.env.VITE_X_API_TOKEN;
+    console.log("Using API Token:", token ? token : "No");
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -75,17 +77,46 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
-    // Simulate typing delay
-    setTimeout(() => {
+    try {
+      const q = btoa(unescape(encodeURIComponent(content)));
+      const res = await fetch("http://localhost:3122/portfolio/prompt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-token": token || "",
+        },
+        body: JSON.stringify({ q }),
+      });
+      let assistantContent: string;
+      
+      if (!res.ok) {
+        assistantContent = getRandomResponse("default");
+      } else {
+        const data = await res.json();
+        assistantContent =
+          data?.answer?.trim() || getRandomResponse("default");
+      }
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: getRandomResponse("default"),
+        content: assistantContent,
         showLinkedIn: true,
       };
+
       setMessages((prev) => [...prev, assistantMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+      } catch (err) {
+        const assistantMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          role: "assistant",
+          content: getRandomResponse("default"),
+          showLinkedIn: true,
+        };
+
+        setMessages((prev) => [...prev, assistantMessage]);
+      } finally {
+        setIsTyping(false);
+      }
   };
 
   const handleSuggestionClick = (section: string) => {
@@ -137,9 +168,13 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
         <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full min-h-[300px] sm:min-h-[400px] text-center px-4">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-2xl sm:text-3xl">👋</span>
-              </div>
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center">
+              <img
+                src="/public/images/profile.jpeg"
+                alt="Md. Moniruzzaman"
+                className="w-full h-full object-cover"
+              />
+            </div>
               <h1 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                 Hi, I'm Md. Moniruzzaman
               </h1>
@@ -174,7 +209,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
           {isTyping && (
             <div className="chat-message flex gap-3 sm:gap-4 py-4 sm:py-6 px-3 sm:px-4 rounded-2xl bg-card">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
-                <span className="text-primary-foreground text-xs sm:text-sm">M</span>
+                <span className="text-primary-foreground text-xs sm:text-sm">M</  span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse-subtle" />
