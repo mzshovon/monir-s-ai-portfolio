@@ -90,7 +90,7 @@ export function Sidebar({ collapsed, onToggle, activeSection, onSectionChange }:
           <XIcon />
         </a>
         <a
-          href="https://github.com/zamanshovon"
+          href="https://github.com/mzshovon"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon"

@@ -67,8 +67,9 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
   };
 
   const handleSend = async (content: string) => {
+    const apiEndPoint = import.meta.env.VITE_API_ENDPOINT;
     const token = import.meta.env.VITE_X_API_TOKEN;
-    console.log("Using API Token:", token ? token : "No");
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -79,7 +80,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
 
     try {
       const q = btoa(unescape(encodeURIComponent(content)));
-      const res = await fetch("http://localhost:3122/portfolio/prompt", {
+      const res = await fetch(`${apiEndPoint}/portfolio/prompt`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

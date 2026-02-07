@@ -1,4 +1,4 @@
-import { Github, Linkedin } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import React from 'react'
 
 function SocialComponent() {
@@ -26,13 +26,13 @@ function SocialComponent() {
             Watch on GitHub
         </a>
         <a
-            href="https://github.com/mzshovon"
+            href="https://mail.google.com/mail/u/0/?fs=1&to=zaman.shovon33@gmail.com&tf=cm"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#333] hover:bg-[#525050] text-white rounded-lg transition-colors text-sm font-medium ml-2"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#7a1f1d] hover:bg-[#bd322f] text-white rounded-lg transition-colors text-sm font-medium ml-2"
         >
-            <Github className="w-4 h-4" />
-            Watch on GitHub
+            <Mail className="w-4 h-4" />
+            Send Email
         </a>
     </div>
   )
