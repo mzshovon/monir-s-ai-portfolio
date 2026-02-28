@@ -79,12 +79,19 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
     setIsTyping(true);
 
     try {
+      let clientId = localStorage.getItem("client_id");
+      if (!clientId) {
+        clientId = crypto.randomUUID();
+        localStorage.setItem("client_id", clientId);
+      }
+      console.log("Client ID:", clientId);
       const q = btoa(unescape(encodeURIComponent(content)));
       const res = await fetch(`${apiEndPoint}/portfolio/prompt`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-api-token": token || "",
+          "x-client-id": clientId,
         },
         body: JSON.stringify({ q }),
       });
@@ -171,7 +178,7 @@ export function ChatContainer({ activeSection, onSectionChange }: ChatContainerP
             <div className="flex flex-col items-center justify-center h-full min-h-[300px] sm:min-h-[400px] text-center px-4">
               <div className="w-12 h-12 sm:w-16 sm:h-16 mb-4 sm:mb-6 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center">
               <img
-                src="https://media.licdn.com/dms/image/v2/D5603AQFybsPhGM8aVA/profile-displayphoto-shrink_200_200/B56ZT4TWr2HEAY-/0/1739332613060?e=1772064000&v=beta&t=sumUhCaYY9dKf3G8HYWxenuEHNMCWkEOqpXVJQatWv0"
+                src="/images/profile.jpeg"
                 alt="Md. Moniruzzaman"
                 className="w-full h-full object-cover"
               />
